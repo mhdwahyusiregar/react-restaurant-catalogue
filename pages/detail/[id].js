@@ -1,34 +1,43 @@
+import Card from '../../components/styled/Card';
+import Container from '../../components/styled/Container';
+import Image from '../../components/styled/Image';
+import Grid from '../../components/styled/Grid';
+
 export default function Detail({ restaurant }) {
   const { name, description, pictureId, menus: { foods, drinks } } = restaurant;
   return (
-    <div className='container'>
-      <img src={`https://restaurant-api.dicoding.dev/images/large/${pictureId}`} alt={name} />
+    <Container maxWidth="80%">
+      <Card>
+        <Image
+          height="450px" src={`https://restaurant-api.dicoding.dev/images/large/${pictureId}`} alt={name} />
+        <Container>
+          <header>
+            <h1>{name}</h1>
+            <p>{description}</p>
+          </header>
 
-      <header>
-        <h1>{name}</h1>
-        <p>{description}</p>
-      </header>
+          <br />
 
-      <br />
+          <main>
+            <h2>Informasi Menu</h2>
 
-      <main>
-        <h2>Informasi Menu</h2>
+            <h3>Makanan</h3>
+            <ul>
+              {foods.map((food) => (
+                <li key={food.name}>{food.name}</li>
+              ))}
+            </ul>
 
-        <h3>Makanan</h3>
-        <ul>
-          {foods.map((food) => (
-            <li key={food.name}>{food.name}</li>
-          ))}
-        </ul>
-
-        <h3>Minuman</h3>
-        <ul>
-          {drinks.map((drink) => (
-            <li key={drink.name}>{drink.name}</li>
-          ))}
-        </ul>
-      </main>
-    </div>
+            <h3>Minuman</h3>
+            <ul>
+              {drinks.map((drink) => (
+                <li key={drink.name}>{drink.name}</li>
+              ))}
+            </ul>
+          </main>
+        </Container>
+      </Card >
+    </Container>
   );
 }
 
